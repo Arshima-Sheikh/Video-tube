@@ -4,12 +4,15 @@ import cors from "cors";
 
 const app = express();
 
-const FRONTEND_ORIGIN = process.env.CORS_ORIGIN || process.env.FRONTEND_ORIGIN || "http://localhost:5173";
+const corsOrigin = process.env.CORS_ORIGIN || process.env.FRONTEND_ORIGIN || "http://localhost:5173";
+const allowedOrigins = corsOrigin.split(",").map((o) => o.trim()).filter(Boolean);
 
 app.use(
   cors({
-    origin: FRONTEND_ORIGIN,
+    origin: allowedOrigins.length > 1 ? allowedOrigins : allowedOrigins[0] || corsOrigin,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -44,6 +47,11 @@ app.use((err, req, res, next) => {
   console.error(err);
   const status = err.status || 500;
   const message = err.message || "Internal server error";
+  const origin = req.headers.origin;
+  if (origin && (allowedOrigins.includes(origin) || allowedOrigins.includes("*"))) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   return res.status(status).json({ status, message });
 });
 

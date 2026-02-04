@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f1f1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Base styles */
+body {
+  @apply bg-gray-900 text-gray-100 antialiased;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  50% { box-shadow: 0 0 20px 5px rgba(99, 102, 241, 0.2); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Glass effect */
+.glass {
+  @apply bg-gray-800/80 backdrop-blur-md border border-gray-700/50;
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg 
+         hover:from-indigo-500 hover:to-purple-500 transition-all duration-200 
+         focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900
+         disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-gray-700 text-gray-200 font-medium rounded-lg 
+         hover:bg-gray-600 transition-all duration-200 
+         focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900
+         border border-gray-600 hover:border-gray-500;
+}
+
+.btn-danger {
+  @apply px-4 py-2 bg-red-600 text-white font-medium rounded-lg 
+         hover:bg-red-500 transition-all duration-200 
+         focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900;
+}
+
+/* Input styles */
+.input-field {
+  @apply w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-gray-100
+         placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+         transition-all duration-200;
+}
+
+.input-field:focus {
+  @apply bg-gray-800/80;
+}
+
+/* Input with left icon */
+.input-with-icon {
+  @apply pl-12;
+}
+
+/* Input icon container */
+.input-icon {
+  @apply absolute inset-y-0 left-0 w-12 flex items-center justify-center pointer-events-none text-gray-500;
+}
+
+/* Card styles */
+.card {
+  @apply bg-gray-800 border border-gray-700/50 rounded-xl overflow-hidden
+         transition-all duration-300 hover:border-gray-600;
+}
+
+.card-hover {
+  @apply hover:transform hover:scale-[1.02] hover:shadow-xl hover:shadow-indigo-500/10;
+}
+
+/* Tooltip */
+.tooltip {
+  @apply invisible opacity-0 absolute z-50 px-2 py-1 text-xs bg-gray-700 text-white rounded
+         transition-all duration-200 whitespace-nowrap;
+}
+
+.tooltip-parent:hover .tooltip {
+  @apply visible opacity-100;
+}
+
+/* Hide scrollbar but allow scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
